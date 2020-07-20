@@ -1,0 +1,8 @@
+starlette
+uvicorn
+fastapi
+motor==2.0.0
+python-dotenv
+databases
+flake8
+autoflake
