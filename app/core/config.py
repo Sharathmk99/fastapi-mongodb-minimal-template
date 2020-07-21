@@ -21,10 +21,14 @@ if not MONGODB_URL:
     MONGO_USER = os.getenv("MONGO_USER", "admin")
     MONGO_PASS = os.getenv("MONGO_PASSWORD", "markqiu")
     MONGO_DB = os.getenv("MONGO_DB", "fastapi")
-
-    MONGODB_URL = DatabaseURL(
-        f"mongodb://{MONGO_USER}:{MONGO_PASS}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
-    )
+    if "MONGO_USER" in os.environ and "MONGO_PASSWORD" in os.environ:
+        MONGODB_URL = DatabaseURL(
+            f"mongodb://{MONGO_USER}:{MONGO_PASS}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
+        )
+    else:
+        MONGODB_URL = DatabaseURL(
+            f"mongodb://{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
+        )
 else:
     MONGODB_URL = DatabaseURL(MONGODB_URL)
 
